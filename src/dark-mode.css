@@ -1,0 +1,28 @@
+.dark {
+    --bg-color: #1f2937;
+    --text-color: #e5e7eb;
+  }
+
+  .dark :root {
+    color: var(--text-color);
+    background-color: var(--bg-color);  
+  }
+  
+  .dark body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+  }
+
+  .dark button {
+    border:2px solid #e5e7eb;
+    cursor: pointer;
+    transition: border-color 0.25s; 
+  }
+ .dark button:hover {
+    border-color: #646cff;
+  }
+  .dark button:focus,
+  .dark button:focus-visible {
+    outline: 4px auto -webkit-focus-ring-color;
+  }
+  
