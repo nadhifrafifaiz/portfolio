@@ -1,4 +1,12 @@
 {
   "hello": "Hello!",
-  "welcome": "Welcome to my app."
+  "welcome": "Welcome to my app.",
+  "home": "Home",
+  "about me": "About Me",
+  "project": "Project",
+  "contact": "Contact",
+  "language": "Language",
+  "theme": "Theme",
+  "dark": "Dark",
+  "light": "Light"
 }

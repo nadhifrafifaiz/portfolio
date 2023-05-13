@@ -1,4 +1,12 @@
 {
   "hello": "Halo",
-  "welcome": "Selamat datang"
+  "welcome": "Selamat datang!",
+  "home": "Beranda",
+  "about me": "Tentang Saya",
+  "project": "Projek",
+  "contact": "Kontak",
+  "language": "Bahasa",
+  "theme": "Tema",
+  "dark": "Gelap",
+  "light": "Terang"
 }
