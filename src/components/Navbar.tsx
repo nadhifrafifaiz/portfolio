@@ -33,16 +33,13 @@ const Navbar = () => {
   }, [isEnglish]);
 
   return (
-    <>
-      <div className="relative flex justify-between items-center py-4 h-16 lg:h-20 bg-white shadow-md px-4 dark:bg-black">
+    <div className="px-[10%] bg-white dark:bg-black">
+      <div className="relative flex justify-between items-center py-4 h-16 lg:h-20 ">
         <div>
           <p className="font-league font-black text-2xl uppercase">NR </p>
         </div>
         <div className="hidden lg:block font-league text-lg">
-          <div className="flex flex-row items-center gap-4">
-            <p className="hover:cursor-pointer hover:text-primary">
-              {t("home")}
-            </p>
+          <div className="flex flex-row items-center gap-6">
             <p className="hover:cursor-pointer hover:text-primary">
               {t("about me")}
             </p>
@@ -50,7 +47,13 @@ const Navbar = () => {
               {t("project")}
             </p>
             <p className="hover:cursor-pointer hover:text-primary">
-              {t("contact")}
+              {t("experience")}
+            </p>
+            <p className="hover:cursor-pointer hover:text-primary">
+              {t("education")}
+            </p>
+            <p className="hover:cursor-pointer hover:text-primary">
+              {t("contact me")}
             </p>
             <p className="hover:cursor-pointer hover:text-primary">|</p>
             <div>
@@ -83,7 +86,7 @@ const Navbar = () => {
                   checked={darkMode}
                   onChange={() => setDarkMode(!darkMode)}
                 />
-                <div className="toggle__line relative w-16 h-7 bg-blue-950 rounded-full shadow-inner dark:bg-blue-500" />
+                <div className="toggle__line relative w-16 h-7 bg-blue-950 rounded-full shadow-inner dark:bg-blue-" />
                 <div
                   className={`toggle__icon absolute inset-y-0 left-0 flex items-center justify-center w-7 h-7 transition-transform transform ${
                     darkMode ? "translate-x-full" : "translate-x-0"
@@ -105,8 +108,11 @@ const Navbar = () => {
           </div>
         </div>
         <div className="lg:hidden">
-          <button className="text-black border-none pt-1" onClick={toggleMenu}>
-            {isOpen ? <FaTimes size={20} /> : <FaBars size={20} />}
+          <button
+            className="text-black border-none pt-1 hover:text-primary"
+            onClick={toggleMenu}
+          >
+            <FaBars size={20} />
           </button>
         </div>
       </div>
@@ -120,15 +126,12 @@ const Navbar = () => {
             <div className="flex flex-row justify-between items-center ">
               <p className="font-extrabold text-3xl">Nadhif Rafifaiz </p>
               <button
-                className="text-black border-none pt-1"
+                className="text-black border-none pt-1 hover:text-primary"
                 onClick={() => setIsOpen(false)}
               >
                 <FaTimes size={20} />
               </button>
             </div>
-            <p className="font-extrabold text-xl hover:cursor-pointer hover:text-primary">
-              {t("home")}
-            </p>
             <p className="font-extrabold text-xl hover:cursor-pointer hover:text-primary">
               {t("about me")}
             </p>
@@ -136,7 +139,13 @@ const Navbar = () => {
               {t("project")}
             </p>
             <p className="font-extrabold text-xl hover:cursor-pointer hover:text-primary">
-              {t("contact")}
+              {t("experience")}
+            </p>
+            <p className="font-extrabold text-xl hover:cursor-pointer hover:text-primary">
+              {t("education")}
+            </p>
+            <p className="font-extrabold text-xl hover:cursor-pointer hover:text-primary">
+              {t("contact me")}
             </p>
           </div>
           <div className="flex flex-col gap-4">
@@ -201,7 +210,7 @@ const Navbar = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

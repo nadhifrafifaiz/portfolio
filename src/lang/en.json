@@ -1,10 +1,14 @@
 {
   "hello": "Hello!",
   "welcome": "Welcome to my app.",
+
   "home": "Home",
   "about me": "About Me",
   "project": "Project",
-  "contact": "Contact",
+  "contact me": "Contact",
+  "experience": "Experience",
+  "education": "Education",
+
   "language": "Language",
   "theme": "Theme",
   "dark": "Dark",
