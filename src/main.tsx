@@ -8,6 +8,8 @@ import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 import eng from "./lang/en.json";
 import id from "./lang/id.json";
+import { Provider } from "react-redux";
+import store from "./app/store";
 
 i18n.use(initReactI18next).init({
   lng: "en",
@@ -21,7 +23,9 @@ i18n.use(initReactI18next).init({
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+      <Provider store={store}>
+        <App />
+      </Provider>
     </BrowserRouter>
   </React.StrictMode>
 );

@@ -2,14 +2,20 @@ import { useState, useEffect } from "react";
 import i18n from "i18next";
 import { useTranslation } from "react-i18next";
 import { FaBars, FaTimes, FaMoon, FaSun } from "react-icons/fa";
-// import stars from "../assets/stars.png";
-// import cloud from "../assets/cloud.png";
+import { useAppDispatch, useAppSelector } from "../app/hook";
+import {
+  setGlobalDarkMode,
+  setGlobalLanguage,
+} from "../features/settings/settingSlice";
 
 const Navbar = () => {
+  const dispatch = useAppDispatch();
   const [darkMode, setDarkMode] = useState(false);
   const [isEnglish, setIsEnglish] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
   const { t } = useTranslation();
+  const darkModeSetting = useAppSelector((state) => state.setting.darkMode);
+  const languageSetting = useAppSelector((state) => state.setting.language);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -19,21 +25,40 @@ const Navbar = () => {
     const htmlEl = document.querySelector("html");
     if (darkMode) {
       htmlEl?.classList.add("dark");
+      localStorage.setItem("darkMode", "true");
+      dispatch(setGlobalDarkMode({ darkMode: true }));
     } else {
       htmlEl?.classList.remove("dark");
+      localStorage.setItem("darkMode", "false");
+      dispatch(setGlobalDarkMode({ darkMode: false }));
     }
   }, [darkMode]);
 
   useEffect(() => {
     if (isEnglish) {
+      console.log("aku inglis", isEnglish);
       i18n.changeLanguage("en");
+      dispatch(setGlobalLanguage({ language: "en" }));
+      localStorage.setItem("language", "en");
     } else {
+      console.log("aku indo", isEnglish);
       i18n.changeLanguage("id");
+      dispatch(setGlobalLanguage({ language: "id" }));
+      localStorage.setItem("language", "id");
     }
   }, [isEnglish]);
 
+  useEffect(() => {
+    setDarkMode(!darkModeSetting);
+    if (languageSetting === "en") {
+      setIsEnglish(false);
+    } else {
+      setIsEnglish(true);
+    }
+  }, []);
+
   return (
-    <div className="px-[10%] bg-white dark:bg-black">
+    <div className="px-[10%] bg-white dark:bg-dark-black">
       <div className="relative flex justify-between items-center py-4 h-16 lg:h-20 ">
         <div>
           <p className="font-league font-black text-2xl uppercase">NR </p>
@@ -86,21 +111,23 @@ const Navbar = () => {
                   checked={darkMode}
                   onChange={() => setDarkMode(!darkMode)}
                 />
-                <div className="toggle__line relative w-16 h-7 bg-blue-950 rounded-full shadow-inner dark:bg-blue-" />
+                <div className="toggle__line relative w-14 h-7 bg-blue-950 rounded-full shadow-inner dark:bg-white" />
                 <div
                   className={`toggle__icon absolute inset-y-0 left-0 flex items-center justify-center w-7 h-7 transition-transform transform ${
                     darkMode ? "translate-x-full" : "translate-x-0"
                   }`}
                 >
                   {darkMode ? (
-                    <div className="rounded-full ">
+                    <div className="rounded-full border-2 border-dark-black">
                       <FaSun
                         className="text-yellow-400 opacity-80"
-                        size="20px"
+                        size="18px"
                       />
                     </div>
                   ) : (
-                    <FaMoon className="text-yellow-300" size="20px" />
+                    <div className="rounded-full bg-gray-500 border-2 border-dark-white">
+                      <FaMoon className="text-yellow-300" size="18px" />
+                    </div>
                   )}
                 </div>
               </div>
@@ -109,7 +136,7 @@ const Navbar = () => {
         </div>
         <div className="lg:hidden">
           <button
-            className="text-black border-none pt-1 hover:text-primary"
+            className="text-dark-black border-none pt-1 hover:text-primary"
             onClick={toggleMenu}
           >
             <FaBars size={20} />
@@ -119,14 +146,14 @@ const Navbar = () => {
       <div
         className={`lg:hidden ${
           isOpen ? "left-0" : "-left-full"
-        } h-screen absolute top-0 z-100 bg-white w-full dark:bg-black transition-all duration-300 ease-in-out`}
+        } h-screen absolute top-0 z-100 bg-white w-full dark:bg-dark-black transition-all duration-300 ease-in-out`}
       >
         <div className="flex h-screen flex-col justify-between p-14">
           <div className="flex flex-col gap-4">
             <div className="flex flex-row justify-between items-center ">
               <p className="font-extrabold text-3xl">Nadhif Rafifaiz </p>
               <button
-                className="text-black border-none pt-1 hover:text-primary"
+                className="text-dark-black border-none pt-1 hover:text-primary"
                 onClick={() => setIsOpen(false)}
               >
                 <FaTimes size={20} />
@@ -158,7 +185,7 @@ const Navbar = () => {
                     isEnglish
                       ? "border-[3px] border-yellow-400 font-semibold"
                       : "opacity-75"
-                  } rounded-3xl w-10 flex justify-center items-center border-2 border-black px-4 py-1 dark:border-white font-semibold text-xs hover:text-primary hover:font-bold hover:border-yellow-400`}
+                  } rounded-3xl w-10 flex justify-center items-center border-2 border-dark-black px-4 py-1 dark:border-white font-semibold text-xs hover:text-primary hover:font-bold hover:border-yellow-400`}
                 >
                   <p>EN</p>
                 </button>
@@ -168,7 +195,7 @@ const Navbar = () => {
                     !isEnglish
                       ? "border-[3px] font-semibold border-yellow-400"
                       : "opacity-75"
-                  } rounded-3xl w-10 flex justify-center items-center border-2 border-black px-4 py-1 dark:border-white font-semibold text-xs hover:text-primary hover:font-bold hover:border-yellow-400`}
+                  } rounded-3xl w-10 flex justify-center items-center border-2 border-dark-black px-4 py-1 dark:border-white font-semibold text-xs hover:text-primary hover:font-bold hover:border-yellow-400`}
                 >
                   <p>ID</p>
                 </button>
@@ -186,7 +213,7 @@ const Navbar = () => {
                       darkMode
                         ? "border-[3px] font-semibold border-yellow-400 "
                         : "opacity-75"
-                    } flex justify-evenly items-end rounded-3xl w-20 border-2 border-black px-4 py-1 dark:border-white hover:text-primary hover:border-yellow-400`}
+                    } flex justify-evenly items-end rounded-3xl w-20 border-2 border-dark-black px-4 py-1 dark:border-white hover:text-primary hover:border-yellow-400`}
                   >
                     <p>{t("dark")}</p>
                   </div>
@@ -199,7 +226,7 @@ const Navbar = () => {
                     className={`${
                       !darkMode
                         ? "border-[3px] font-semibold border-yellow-400"
-                        : "opacity-75 border-black dark:border-white hover:text-primary hover:border-yellow-400"
+                        : "opacity-75 border-dark-black dark:border-white hover:text-primary hover:border-yellow-400"
                     } flex justify-evenly items-center rounded-3xl w-20 border-2 px-4 py-1 `}
                   >
                     <p>{t("light")}</p>
