@@ -20,10 +20,21 @@ const Navbar = () => {
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
-
   useEffect(() => {
+    if (isEnglish) {
+      i18n.changeLanguage("en");
+      dispatch(setGlobalLanguage({ language: "en" }));
+      localStorage.setItem("language", "en");
+    } else {
+      i18n.changeLanguage("id");
+      dispatch(setGlobalLanguage({ language: "id" }));
+      localStorage.setItem("language", "id");
+    }
+  }, [isEnglish]);
+  const toggleDarkMode = (value: boolean) => {
     const htmlEl = document.querySelector("html");
-    if (darkMode) {
+    setDarkMode(value);
+    if (value) {
       htmlEl?.classList.add("dark");
       localStorage.setItem("darkMode", "true");
       dispatch(setGlobalDarkMode({ darkMode: true }));
@@ -32,28 +43,17 @@ const Navbar = () => {
       localStorage.setItem("darkMode", "false");
       dispatch(setGlobalDarkMode({ darkMode: false }));
     }
-  }, [darkMode]);
+  };
 
   useEffect(() => {
-    if (isEnglish) {
-      console.log("aku inglis", isEnglish);
-      i18n.changeLanguage("en");
-      dispatch(setGlobalLanguage({ language: "en" }));
-      localStorage.setItem("language", "en");
-    } else {
-      console.log("aku indo", isEnglish);
-      i18n.changeLanguage("id");
-      dispatch(setGlobalLanguage({ language: "id" }));
-      localStorage.setItem("language", "id");
-    }
-  }, [isEnglish]);
+    setDarkMode(darkModeSetting);
+  }, [darkModeSetting]);
 
   useEffect(() => {
-    setDarkMode(!darkModeSetting);
     if (languageSetting === "en") {
-      setIsEnglish(false);
-    } else {
       setIsEnglish(true);
+    } else {
+      setIsEnglish(false);
     }
   }, []);
 
@@ -77,9 +77,11 @@ const Navbar = () => {
             <p className="hover:cursor-pointer hover:text-primary">
               {t("education")}
             </p>
-            <p className="hover:cursor-pointer hover:text-primary">
-              {t("contact me")}
-            </p>
+            <a href="#contact">
+              <p className="hover:cursor-pointer hover:text-primary">
+                {t("contact me")}
+              </p>
+            </a>
             <p className="hover:cursor-pointer hover:text-primary">|</p>
             <div>
               <button
@@ -108,8 +110,8 @@ const Navbar = () => {
                   id="toggle"
                   type="checkbox"
                   className="hidden"
-                  checked={darkMode}
-                  onChange={() => setDarkMode(!darkMode)}
+                  checked={darkModeSetting}
+                  onChange={() => toggleDarkMode(!darkMode)}
                 />
                 <div className="toggle__line relative w-14 h-7 bg-blue-950 rounded-full shadow-inner dark:bg-white" />
                 <div
@@ -171,16 +173,18 @@ const Navbar = () => {
             <p className="font-extrabold text-xl hover:cursor-pointer hover:text-primary">
               {t("education")}
             </p>
-            <p className="font-extrabold text-xl hover:cursor-pointer hover:text-primary">
-              {t("contact me")}
-            </p>
+            <a href="#contact">
+              <p className="font-extrabold text-xl hover:cursor-pointer hover:text-primary">
+                {t("contact me")}
+              </p>
+            </a>
           </div>
           <div className="flex flex-col gap-4">
             <div className="flex flex-col gap-2">
               <p className="font-bold text-base">{t("language")}</p>
               <div className="flex gap-2">
                 <button
-                  onClick={() => setIsEnglish(true)}
+                  onClick={() => toggleDarkMode(true)}
                   className={`${
                     isEnglish
                       ? "border-[3px] border-yellow-400 font-semibold"
@@ -190,7 +194,7 @@ const Navbar = () => {
                   <p>EN</p>
                 </button>
                 <button
-                  onClick={() => setIsEnglish(false)}
+                  onClick={() => toggleDarkMode(false)}
                   className={`${
                     !isEnglish
                       ? "border-[3px] font-semibold border-yellow-400"
@@ -205,7 +209,7 @@ const Navbar = () => {
               <p className="font-bold text-base">{t("theme")}</p>
               <div className="flex gap-2">
                 <button
-                  onClick={() => setDarkMode(true)}
+                  onClick={() => toggleDarkMode(true)}
                   className="rounded-lg "
                 >
                   <div
@@ -219,7 +223,7 @@ const Navbar = () => {
                   </div>
                 </button>
                 <button
-                  onClick={() => setDarkMode(false)}
+                  onClick={() => toggleDarkMode(false)}
                   className="rounded-lg"
                 >
                   <div

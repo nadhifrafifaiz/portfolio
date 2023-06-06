@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Navbar from "./components/Navbar";
 import { useAppDispatch } from "./app/hook";
@@ -15,6 +14,7 @@ function App() {
     const htmlEl = document.querySelector("html");
     const darkMode = localStorage.getItem("darkMode");
     const language = localStorage.getItem("language");
+    console.log(darkMode);
     if (darkMode === "true") {
       dispatch(setGlobalDarkMode({ darkMode: true }));
       htmlEl?.classList.add("dark");
@@ -38,13 +38,14 @@ function App() {
   }, []);
 
   return (
-    <div>
+    <div className="block">
       <div className="sticky top-0">
         <Navbar />
       </div>
-      <Routes>
+      <Home />
+      {/* <Routes>
         <Route path="/" element={<Home />} />
-      </Routes>
+      </Routes> */}
     </div>
   );
 }

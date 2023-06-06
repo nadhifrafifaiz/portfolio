@@ -25,7 +25,6 @@ const settingSlice = createSlice({
             state.darkMode = action.payload.darkMode
         },
         setGlobalLanguage: (state, action: PayloadAction<SetGlobalLanguage>) => {
-            console.log(action.payload.language)
             state.language = action.payload.language
         }
     }

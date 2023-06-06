@@ -1,12 +1,11 @@
-import { useTranslation } from "react-i18next";
+import Contact from "../components/Contact";
+import Jumbotron from "../components/Jumbotron";
 
 const Home = () => {
-  const { t } = useTranslation();
-
   return (
     <div>
-      <h1 className="text-4xl font-bold">{t("hello")}</h1>
-      <h1 className="text-4xl font-bold">{t("welcome")}</h1>
+      <Jumbotron />
+      <Contact />
     </div>
   );
 };
