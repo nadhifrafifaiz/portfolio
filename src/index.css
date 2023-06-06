@@ -5,6 +5,7 @@
 /* font-family: 'League Spartan', sans-serif;
 font-family: 'Open Sans', sans-serif; */
 
+
 :root {
   font-family: 'Open Sans', sans-serif;
   line-height: 1.5;
@@ -19,15 +20,22 @@ font-family: 'Open Sans', sans-serif; */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+
+  --bg-color: #2b2b2b;
+  --text-color: #e5e7eb;
+
+  --primary: #FCDD12;
+  --dark-white: #B8B8B8;
+  --light-black: #2B2B2B;
+  --dark-black: #212121;
+  --light-white:#FFFFFF;
+
 }
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: var(--dark-black);
   text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
 }
 
 body {

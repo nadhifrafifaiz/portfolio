@@ -65,18 +65,26 @@ const Navbar = () => {
         </div>
         <div className="hidden lg:block font-league text-lg">
           <div className="flex flex-row items-center gap-6">
-            <p className="hover:cursor-pointer hover:text-primary">
-              {t("about me")}
-            </p>
-            <p className="hover:cursor-pointer hover:text-primary">
-              {t("project")}
-            </p>
-            <p className="hover:cursor-pointer hover:text-primary">
-              {t("experience")}
-            </p>
-            <p className="hover:cursor-pointer hover:text-primary">
-              {t("education")}
-            </p>
+            <a href="#about">
+              <p className="hover:cursor-pointer hover:text-primary">
+                {t("about me")}
+              </p>
+            </a>
+            <a href="#project">
+              <p className="hover:cursor-pointer hover:text-primary">
+                {t("project")}
+              </p>
+            </a>
+            <a href="#experience">
+              <p className="hover:cursor-pointer hover:text-primary">
+                {t("experience")}
+              </p>
+            </a>
+            <a href="#education">
+              <p className="hover:cursor-pointer hover:text-primary">
+                {t("education")}
+              </p>
+            </a>
             <a href="#contact">
               <p className="hover:cursor-pointer hover:text-primary">
                 {t("contact me")}
@@ -184,7 +192,7 @@ const Navbar = () => {
               <p className="font-bold text-base">{t("language")}</p>
               <div className="flex gap-2">
                 <button
-                  onClick={() => toggleDarkMode(true)}
+                  onClick={() => setIsEnglish(true)}
                   className={`${
                     isEnglish
                       ? "border-[3px] border-yellow-400 font-semibold"
@@ -194,7 +202,7 @@ const Navbar = () => {
                   <p>EN</p>
                 </button>
                 <button
-                  onClick={() => toggleDarkMode(false)}
+                  onClick={() => setIsEnglish(false)}
                   className={`${
                     !isEnglish
                       ? "border-[3px] font-semibold border-yellow-400"
